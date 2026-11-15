@@ -59,12 +59,16 @@ img{max-width:100%;display:block}
 .hdr-r{display:flex;align-items:center;gap:20px}
 /* hero */
 .hero{padding:clamp(32px,4.5vw,64px) 0 0}
-.hero-head{max-width:960px}
+.hero-head{grid-area:head}
+.hero-vid{grid-area:vid}
+.hero-grid .card-wrap{grid-area:form}
+@media (min-width:901px){.hero-grid .card-wrap{position:sticky;top:100px}}
 .rating{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:var(--ink-2)}
 .stars{color:#B8862B;letter-spacing:2px;font-size:16px}
 .hero .h1{margin-top:16px}
 .hero .lede{margin-top:14px;max-width:72ch;font-size:18px;color:#4A4F57}
-.hero-grid{margin-top:clamp(28px,3.5vw,48px);align-items:flex-start}
+.hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"head form" "vid form";column-gap:clamp(32px,4.5vw,64px);row-gap:28px;align-items:start}
+@media (max-width:900px){.hero-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "form" "vid"}}
 .vid{position:relative;border-radius:10px;overflow:hidden;background:var(--navy);aspect-ratio:736/414;cursor:pointer;border:0;padding:0;width:100%;display:block}
 .vid img{width:100%;height:100%;object-fit:cover}
 .vid .play{position:absolute;left:32.2%;top:51.2%;transform:translate(-50%,-50%);width:23.5%;aspect-ratio:1;border-radius:50%;background:var(--action);display:flex;align-items:center;justify-content:center;color:#FCFAF6;box-shadow:0 0 0 6px rgba(252,250,246,.9);transition:background-color .15s ease-out}
@@ -221,7 +225,7 @@ img{max-width:100%;display:block}
   .locgrid .lph{min-height:0;aspect-ratio:16/9;height:auto}
   .hero .h1{margin-top:8px}
   .hero .lede{font-size:16.5px;line-height:1.5;margin-top:12px}
-  .hero-grid{margin-top:20px;flex-direction:column-reverse}
+  .hero-grid{row-gap:20px}
   .card-wrap .arc{display:none}
   .fields{grid-template-columns:minmax(0,1fr)}
   .opts{grid-template-columns:minmax(0,1fr)}
@@ -290,6 +294,7 @@ img{max-width:100%;display:block}
 <!-- 2. Hero -->
 <section class="hero" aria-labelledby="h1">
   <div class="wrap">
+    <div class="hero-grid">
     <div class="hero-head">
       <div class="toprow"><p class="eyebrow">Carlsbad &amp; Laguna Hills</p><p class="rating"><span class="stars" aria-hidden="true">★★★★★</span><span>4.9 on Google</span></p></div>
       <h1 class="h1" id="h1">Freedom from joint and back pain, <span class="tone">without surgery</span></h1>
@@ -297,8 +302,7 @@ img{max-width:100%;display:block}
       <div class="docstrip"><img src="img/dr-derrington.jpg" alt="" width="1000" height="883"><p><b>Dr. Steve Derrington, DO</b><span>Board certified · Fellowship trained in interventional spine and sports medicine</span></p></div>
     </div>
 
-    <div class="split hero-grid">
-      <div class="c7">
+      <div class="hero-vid">
         <button class="vid" type="button" id="vid" aria-label="Play patient story video">
           <img src="img/ayub-poster.jpg" alt="Ayub, a Derrington Orthopedics patient, telling his story" width="736" height="414">
           <span class="play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
@@ -307,11 +311,11 @@ img{max-width:100%;display:block}
         <p class="vcap" id="vcap">Ayub talks about his knee in his own words. Individual results vary.</p>
       </div>
 
-      <div class="c5 card-wrap" id="survey">
+      <div class="card-wrap" id="survey">
         <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
         <div class="card" role="region" aria-labelledby="sv-h">
           <h2 class="card-h" id="sv-h">See if you’re likely a candidate</h2>
-          <p class="card-sub">Six quick questions. If it looks like a fit, you’ll book a free 15-minute call with Dr. Derrington’s team.</p>
+          <p class="card-sub">Answer a few questions. If it looks like a fit, you’ll book a free 15-minute call with Dr. Derrington’s team.</p>
           <div class="prog"><span id="pg-t">Question 1 of 6</span><span class="bar"><span id="pg-b"></span></span></div>
 
           <div class="qstep" data-k="area">
@@ -426,7 +430,7 @@ img{max-width:100%;display:block}
     <p class="eyebrow">How it works</p>
     <h2 class="h2" id="how-h" style="margin-top:12px">Three steps to a clear answer</h2>
     <ol class="path">
-      <li><span class="node">1</span><h3 class="ph3">Answer six questions.</h3><p>Where it hurts, how long it’s been, what you’ve tried and which office suits you. The whole thing takes about a minute.</p></li>
+      <li><span class="node">1</span><h3 class="ph3">Answer a few questions.</h3><p>Where it hurts, how long it’s been, what you’ve tried and which office suits you. The whole thing takes about a minute.</p></li>
       <li><span class="node">2</span><h3 class="ph3">Talk with the team.</h3><p>A free 15-minute phone call with Dr. Derrington’s team. Tell them what the pain has stopped you doing. If you want to go ahead, they book your consultation.</p></li>
       <li><span class="node">3</span><h3 class="ph3">See Dr. Derrington.</h3><p>He examines you hands-on with ultrasound, goes through any imaging you have and tells you whether treatment makes sense for you. If it does, he builds your plan.</p></li>
     </ol>
