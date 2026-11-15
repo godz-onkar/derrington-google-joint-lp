@@ -69,9 +69,43 @@ img{max-width:100%;display:block}
 .hero .lede{margin-top:14px;max-width:72ch;font-size:18px;color:#4A4F57}
 .hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"head form" "vid form";column-gap:clamp(32px,4.5vw,64px);row-gap:28px;align-items:start}
 @media (max-width:900px){.hero-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "form" "vid"}}
-.vid{position:relative;border-radius:10px;overflow:hidden;background:var(--navy);aspect-ratio:736/414;cursor:pointer;border:0;padding:0;width:100%;display:block}
+.vid{position:relative;border-radius:10px;overflow:hidden;background:var(--navy);aspect-ratio:16/9;cursor:pointer;border:0;padding:0;width:100%;display:block}
 .vid img{width:100%;height:100%;object-fit:cover}
-.vid .play{position:absolute;left:32.2%;top:51.2%;transform:translate(-50%,-50%);width:23.5%;aspect-ratio:1;border-radius:50%;background:var(--action);display:flex;align-items:center;justify-content:center;color:#FCFAF6;box-shadow:0 0 0 6px rgba(252,250,246,.9);transition:background-color .15s ease-out}
+.vid .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(64px,15%,92px);aspect-ratio:1;border-radius:50%;background:var(--action);display:flex;align-items:center;justify-content:center;color:#FCFAF6;box-shadow:0 0 0 6px rgba(252,250,246,.9);transition:background-color .15s ease-out}
+/* video lightbox */
+.vbox{border:0;padding:0;background:transparent;max-width:none;max-height:none}
+.vbox::backdrop{background:rgba(10,20,32,.86)}
+.vbox video{display:block;height:min(86vh,860px);aspect-ratio:9/16;max-width:94vw;border-radius:10px;background:#000}
+.vbox{position:fixed}
+.vbox .x{position:absolute;top:10px;right:10px;z-index:2;box-shadow:0 1px 6px rgba(0,0,0,.35);width:44px;height:44px;border-radius:50%;border:0;background:#FCFAF6;color:var(--navy);font-size:24px;line-height:1;cursor:pointer}
+.vbox .vnote{margin-top:10px;text-align:center;color:#D3DFEA;font-size:14px}
+/* google reviews */
+.rv-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px}
+.gsum{display:inline-flex;align-items:center;gap:14px;padding:12px 18px;background:#FFFEFC;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:#202124;line-height:1.3}
+.gsum:hover{border-color:var(--action)}
+.gsum b{font-size:22px;font-weight:600}
+.gst{color:#FBBC04;letter-spacing:1px;font-size:16px}
+.gsub{font-size:13.5px;color:#5F6368}
+.gwall{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px;align-items:start}
+.pvid{grid-column:span 2;margin:0}
+.grev{margin:0;background:#FFFEFC;border:1px solid #E2E2E0;border-radius:10px;padding:18px 20px 16px;color:#202124}
+.grev header{display:flex;align-items:center;gap:12px}
+.grev header .av{width:40px;height:40px;border-radius:50%;background:var(--c);color:#FFFEFC;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:18px;flex:none}
+.grev header p{flex:1;min-width:0;line-height:1.3}
+.grev header b{display:block;font-size:15px;font-weight:600;color:#202124}
+.grev header span{font-size:13px;color:#70757A}
+.gi{width:20px;height:20px;flex:none}
+.grev .gst{display:block;margin-top:10px;font-size:15px}
+.grev blockquote{margin-top:6px;font-size:15.5px;line-height:1.55;color:#3C4043;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.grev.open blockquote{display:block;-webkit-line-clamp:unset;overflow:visible}
+.rmore{margin-top:4px;border:0;background:none;padding:0;min-height:32px;color:#1A73E8;font:500 14.5px var(--body);cursor:pointer}
+.xa{display:none}
+.gwall.all .xa{display:block}
+.rv-foot{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:28px}
+.btn-ghost{min-height:50px;padding:0 26px;border:1px solid var(--action);border-radius:6px;background:transparent;color:var(--action);font:600 16px var(--body);cursor:pointer;transition:background-color .15s ease-out}
+.btn-ghost:hover{background:#E3ECF4}
+@media (max-width:980px){.gwall{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.gwall{grid-template-columns:minmax(0,1fr)}.pvid{grid-column:auto}.xm{display:none}.gwall.all .xm{display:block}.gsum{width:100%}}
 .vid:hover .play{background:var(--action-hover)}
 .vid .play svg{width:34%;height:34%;margin-left:6%}
 .vid .vlabel{position:absolute;left:16px;bottom:14px;background:rgba(18,37,55,.82);color:#FCFAF6;font-size:13.5px;font-weight:600;padding:6px 12px;border-radius:4px}
@@ -275,6 +309,7 @@ img{max-width:100%;display:block}
     <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M3 10.5h18M7 15h4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.75"/></symbol>
+    <symbol id="g-logo" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></symbol>
     <symbol id="arc" viewBox="0 0 120 120"><path d="M101 33A50 50 0 1 0 104 82" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
   </defs>
 </svg>
@@ -303,8 +338,8 @@ img{max-width:100%;display:block}
     </div>
 
       <div class="hero-vid">
-        <button class="vid" type="button" id="vid" aria-label="Play patient story video">
-          <img src="img/ayub-poster.jpg" alt="Ayub, a Derrington Orthopedics patient, telling his story" width="736" height="414">
+        <button class="vid" type="button" id="vid" data-src="https://assets.cdn.filesafe.space/0kB4kYQvscaHrPAy3nDY/media/6aa44c789f8b31b6abb8be12.mp4" aria-label="Play Ayub’s patient story">
+          <img src="img/ayub-poster.jpg" alt="Ayub, a Derrington Orthopedics patient, telling his story" width="960" height="540">
           <span class="play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
           <span class="vlabel">Patient story</span>
         </button>
@@ -465,26 +500,60 @@ img{max-width:100%;display:block}
 <!-- 8. Reviews -->
 <section class="sec" aria-labelledby="rev-h">
   <div class="wrap">
-    <p class="eyebrow">Reviews</p>
-    <h2 class="h2" id="rev-h" style="margin-top:12px">What patients say</h2>
-    <div class="revs">
-      <figure class="rev">
-        <span class="stars" aria-label="5 stars">★★★★★</span>
-        <blockquote>“Dr. Derrington and his team were excellent. He did a thorough MRI review and examined me under ultrasound before coming up with a really solid treatment plan. The treatment itself was comprehensive and far less painful than I expected. The practice staff were great throughout, and I felt well taken care of from start to finish. Highly recommend.”</blockquote>
-        <figcaption class="who">Vik S. <span class="src">Google review</span></figcaption>
-      </figure>
-      <figure class="rev">
-        <span class="stars" aria-label="5 stars">★★★★★</span>
-        <blockquote>“My experience is excellent. 2 1/2 months after treatment and physical therapy I am felling good…anticipating a full recovery in a few months. I have complete confidence in Dr. Derrington.”</blockquote>
-        <figcaption class="who">Linda F. <span class="src">Google review</span></figcaption>
-      </figure>
-      <figure class="rev">
-        <span class="stars" aria-label="5 stars">★★★★★</span>
-        <blockquote>“He thoroughly exams your areas of pain. He’s very precise with his needle placements with the use of ultrasound. And lastly, he doesn’t try to up sell you.”</blockquote>
-        <figcaption class="who">Ken C. <span class="src">Google review</span></figcaption>
-      </figure>
+    <div class="rv-head">
+      <div>
+        <p class="eyebrow">Reviews</p>
+        <h2 class="h2" id="rev-h" style="margin-top:12px">What patients say</h2>
+      </div>
+      <a class="gsum" href="https://maps.app.goo.gl/C5oF4UK9FobqjJ6t9" target="_blank" rel="noopener">
+        <svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg>
+        <span><b>4.9</b> <span class="gst" aria-label="4.9 out of 5 stars">★★★★★</span><br><span class="gsub">87 Google reviews · Carlsbad office</span></span>
+      </a>
     </div>
-    <p class="rv-note">Individual results vary.</p>
+
+    <div class="gwall" id="gwall">
+      <figure class="pvid">
+        <button class="vid" type="button" data-src="https://assets.cdn.filesafe.space/0kB4kYQvscaHrPAy3nDY/media/6aa45899770fd0c165ab6e2c.mp4" aria-label="Play Beck’s patient story">
+          <img src="img/beck-poster.jpg" alt="Beck, a Derrington Orthopedics patient, telling his story" width="960" height="540" loading="lazy">
+          <span class="play pc" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
+          <span class="vlabel">Patient story · Back</span>
+        </button>
+        <figcaption class="vcap">Beck talks about his back in his own words.</figcaption>
+      </figure>
+
+      <figure class="grev"><header><span class="av" style="--c:#5C6BC0">V</span><p><b>Vik S.</b><span>3 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>Dr. Derrington and his team were excellent. He did a thorough MRI review and examined me under ultrasound before coming up with a really solid treatment plan. The treatment itself was comprehensive and far less painful than I expected. The practice staff were great throughout, and I felt well taken care of from start to finish. Highly recommend.</blockquote></figure>
+
+      <figure class="grev"><header><span class="av" style="--c:#00897B">C</span><p><b>Carol C.</b><span>3 years ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>Before I had my procedure done I was having extreme difficulty walking up stairs, putting on shoes and getting into a car. I now am able to walk stairs comfortably, get on my shoes and get into a car. I would recommend this procedure to anyone. The office is professional and I love the alternative instead of surgery. I have told everyone about Dr Derrington</blockquote></figure>
+
+      <figure class="grev"><header><span class="av" style="--c:#8E24AA">J</span><p><b>Jeanne A.</b><span>7 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>Dr. Derrington has helped me twice now. First for hip issues and second for low back. Both times I left with greatly reduced pain. He takes time to explain and be sure you understand your body as well as what we hoped to achieve with a procedure. His staff is knowledgeable and kind. I highly recommend him.</blockquote></figure>
+
+      <figure class="grev xm"><header><span class="av" style="--c:#F4511E">L</span><p><b>Lorraine S.</b><span>3 years ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>I am so grateful for Dr. Derrington! I struggled for years with my knee never feeling “right” after ACL/meniscus/bone graft surgeries. Dr. Derrington didn’t just provide the injection - it was a plan to get myself healthy and back to being at peak performance. I am a CrossFit/mountain bike/snowboarding/skiing/climbing/surfing, etc. athlete - and this is the strongest I’ve felt!</blockquote></figure>
+
+      <figure class="grev xm"><header><span class="av" style="--c:#3949AB">A</span><p><b>Anthony C.</b><span>2 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>Dr Derrington is top notch in his knowledge. He is extremely patient and answered my questions in a very thorough manner. The treatment was above and beyond similar treatments I have had from other physicians. I would recommend him to anyone seeking pain relief and returning to an active lifestyle.</blockquote></figure>
+
+      <figure class="grev xm"><header><span class="av" style="--c:#6D4C41">L</span><p><b>Linda F.</b><span>10 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>My experience is excellent. 2 1/2 months after treatment and physical therapy I am felling good…anticipating a full recovery in a few months. I have complete confidence in Dr. Derrington.</blockquote></figure>
+
+      <figure class="grev xm"><header><span class="av" style="--c:#D81B60">C</span><p><b>Carla D.</b><span>3 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>If I could give this Doctor and his staff 10 stars I would! I was super apprehensive about having this procedure done, but between Dr. Derrington and Melanie, I am so glad I did! From my first visit with him, he showed me everything, explained everything in detail. Melanie going a step further sent me videos of the procedures, and that really put my mind at ease, and I was actually excited about get this done! Then came the day of my visit at his office in Carlsbad, his staff, T and Abraham were amazing. And I love that Dr. Derrington asked me what kind of music I wanted to hear during the procedures, that really calmed me and made it a lot more comfortable. On the way home, I had issues with the pain medication, and Dr. Derrington was available to take our call and get what I needed. They are a super stellar staff and I highly recommend them!</blockquote></figure>
+
+      <figure class="grev xa"><header><span class="av" style="--c:#43A047">J</span><p><b>J&amp;S K.</b><span>2 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>I have found Dr. Derrington to be an excellent doctor. He is knowledgeable, patient, and caring. A professional who looks after his patients needs more than the bottom line. He demonstrated time after time that his is willing to go the extra mile to help his patients. I also found his attitude has rubbed off on his office, as they also are professional that looks at the patient needs first. A great firm to do business with.</blockquote></figure>
+
+      <figure class="grev xa"><header><span class="av" style="--c:#1E88E5">J</span><p><b>Jane M.</b><span>9 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>I can’t say enough fabulous comments regarding Derrington Orthopedics. From the front office staff to the doctor and his assistant. They got me in when I was really hurting, found the root of the problem and fixed it!! Well done!!</blockquote></figure>
+
+      <figure class="grev xa"><header><span class="av" style="--c:#C0CA33">T</span><p><b>Traci L.</b><span>5 years ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>Dr.Derrington and his staff are great to work with. They really care about their patients and want to help in every way possible. He seems very knowledgeable and cares what is best for his patients. He went out of his way to make sure I was not in pain and followed up days later to see I was doing well. I would recommend him to anyone who needed back, knee, or shoulder pain services.</blockquote></figure>
+
+      <figure class="grev xa"><header><span class="av" style="--c:#546E7A">L</span><p><b>Larry S.</b><span>2 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>Explained all options. Very concerned about pain level. Had equipment that was necessary. Staff was excellent.</blockquote></figure>
+
+      <figure class="grev xa"><header><span class="av" style="--c:#7CB342">K</span><p><b>Kristi H.</b><span>4 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>The office staff was prompt, efficient and caring. They have also followed up on me post-procedure.</blockquote></figure>
+
+      <figure class="grev xa"><header><span class="av" style="--c:#FB8C00">F</span><p><b>Francisco P.</b><span>5 years ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>Dr Derrington was great ! Very helpful and attentive . His staff is also great, also want to give a big thank you for Melanie for making everything super easy from start to finish definitely recommend them to everyone, once again thank you for the amazing customer service and work you provide.</blockquote></figure>
+
+      <figure class="grev xa"><header><span class="av" style="--c:#00ACC1">N</span><p><b>N.</b><span>3 months ago</span></p><svg class="gi" viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg></header><span class="gst" aria-label="5 stars">★★★★★</span><blockquote>I had an outstanding experience with Dr. Derrington. From the moment of my visit for cervical radiculopathy, he took the time to perform a thorough history and comprehensive physical examination. His depth of knowledge, thoughtful approach, and ability to explain my condition and treatment options gave me great confidence in my care. What truly sets Dr. Derrington apart is his genuine commitment to his patients. His follow-up after the visit was exceptional, ensuring my questions were answered and that I was making progress. I never felt rushed and always felt heard. Dr. Derrington is an outstanding physician who combines exceptional clinical expertise with compassion and professionalism. As a physician myself, I especially appreciated his thoroughness, clinical judgment, and dedication to excellent patient care. I highly recommend him to anyone seeking expert, patient-centered care.</blockquote></figure>
+    </div>
+
+    <div class="rv-foot">
+      <button class="btn-ghost" type="button" id="rv-more" aria-expanded="false" aria-controls="gwall">Read all 14 reviews</button>
+      <p class="rv-note">Reviews shown as published on Google. Individual results vary.</p>
+    </div>
   </div>
 </section>
 
@@ -551,6 +620,8 @@ img{max-width:100%;display:block}
 
 <div class="mbar"><a class="btn" href="#survey">Get My Personalized Options Today</a><a class="mcall" href="tel:+17607214000" aria-label="Call (760) 721-4000"><svg width="22" height="22" aria-hidden="true"><use href="#i-phone"/></svg></a></div>
 
+<dialog class="vbox" id="vbox" aria-label="Patient story video"><button class="x" type="button" aria-label="Close video">×</button><video controls playsinline preload="none"></video><p class="vnote">Individual results vary.</p></dialog>
+
 <section class="notes" aria-label="Layout and build notes">
   <div class="wrap">
     <h2>Layout and build notes (preview only)</h2>
@@ -563,7 +634,8 @@ img{max-width:100%;display:block}
     </ul>
     <h3>Before go-live</h3>
     <ul>
-      <li>Hero video: replace the poster with a clean still of Ayub (the current poster has text and a play button baked in). Watch the video and confirm he uses none of the Google-restricted treatment words listed in the copy file.</li>
+      <li>Videos: Ayub (knee, hero) and Beck (back, reviews section) are the edited testimonials already hosted in GHL. Both are vertical with burned-in captions, so they open full height in a player overlay. Watch both all the way through and confirm neither says any of the Google-restricted treatment words listed in the copy file.</li>
+      <li>Reviews: 14 five-star Google reviews from the Carlsbad profile, copied as published on November 15, 2026, and screened for Google-restricted words. Desktop shows the video and seven reviews, mobile the video and three; “Read all 14 reviews” opens the rest on the page.</li>
       <li>Rating badge: recheck the Carlsbad Google rating before launch.</li>
       <li>Locations show the Carlsbad exterior beside both addresses. The existing Laguna Hills photo shows an old window sign, so it isn't used.</li>
       <li>The cost question opens by default, because cost is the first thing most leads ask about.</li>
@@ -600,7 +672,24 @@ img{max-width:100%;display:block}
   document.querySelectorAll('.tile').forEach(function(tl){tl.addEventListener('click',function(){
     document.getElementById('survey').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   })});
-  document.getElementById('vid').addEventListener('click',function(){document.getElementById('vcap').textContent='Preview only. Ayub’s video plays here on the live page. Individual results vary.'});
+  var box=document.getElementById('vbox'),bv=box.querySelector('video');
+  document.querySelectorAll('.vid[data-src]').forEach(function(btn){btn.addEventListener('click',function(){
+    bv.src=btn.dataset.src;box.showModal();bv.play().catch(function(){});
+  })});
+  function closeBox(){bv.pause();bv.removeAttribute('src');bv.load();if(box.open)box.close();}
+  box.querySelector('.x').addEventListener('click',closeBox);
+  box.addEventListener('click',function(e){if(e.target===box)closeBox();});
+  box.addEventListener('cancel',function(){bv.pause();});
+  var wall=document.getElementById('gwall'),more=document.getElementById('rv-more');
+  function clampCheck(){wall.querySelectorAll('.grev').forEach(function(c){
+    if(c.querySelector('.rmore')||c.offsetParent===null)return;
+    var q=c.querySelector('blockquote');
+    if(q.scrollHeight>q.clientHeight+2){var b=document.createElement('button');b.type='button';b.className='rmore';b.textContent='Read more';
+      b.addEventListener('click',function(){var o=c.classList.toggle('open');b.textContent=o?'Show less':'Read more';});c.appendChild(b);}
+  })}
+  more.addEventListener('click',function(){var o=wall.classList.toggle('all');more.setAttribute('aria-expanded',o);more.textContent=o?'Show fewer reviews':'Read all 14 reviews';clampCheck();if(!o)wall.scrollIntoView({block:'start'});});
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(clampCheck)}else{clampCheck()}
+  window.addEventListener('resize',clampCheck);
   show(0);
   var sv=document.getElementById('survey'),mb=document.querySelector('.mbar');
   if('IntersectionObserver' in window&&sv&&mb){new IntersectionObserver(function(es){es.forEach(function(e){mb.classList.toggle('away',e.isIntersecting)})},{threshold:0.15}).observe(sv);}
